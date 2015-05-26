@@ -113,6 +113,8 @@
     var finishResults = function(email, date, skill) {
       var promiselist = [];
       var data = [];
+      params['to'] = date;
+      params['from'] = date;
       params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + skill + '")';
       console.log(params);
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
