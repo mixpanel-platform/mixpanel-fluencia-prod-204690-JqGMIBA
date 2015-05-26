@@ -117,7 +117,7 @@
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       Promise.all(promiselist).then(function(promiseArray){
         
-      }
+      });
     }
     
     var chartIt = function(data) {
