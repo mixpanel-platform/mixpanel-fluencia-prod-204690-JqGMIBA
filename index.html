@@ -43,6 +43,7 @@
         
       params['from'] = dateRange.from.toISOString().substring(0, 10);
       params['to'] = dateRange.to.toISOString().substring(0, 10);
+      params.delete['where'];
       
       promiselist = [];
       if(dateRange) {
@@ -185,13 +186,16 @@
     }
     
     //return flat object of: email, date, skill, rating, review
-    var processResults = function(email, date, results) {
+    var processResultsSkill = function(email, date, results) {
       var returnObj = [];
       var promiselist = [];
       params['where'] = '(properties["$email"] == "' + email + '")';
+      params['to'] = date;
+      params['from'] = date;
       returnObj.push(email);
       returnObj.push(date);
       promiselist.push(MP.api.segment("Skill Review", "skill_name_en", params).done(function(results){ return results.values(); }));
+      //params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == ';
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       
