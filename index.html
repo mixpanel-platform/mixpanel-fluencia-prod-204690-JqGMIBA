@@ -36,7 +36,7 @@
           to: '2015-04-30',
           type: 'general',
           unit: 'day',
-          limit: 1
+          limit: 5
         };
     
     var queryNav = function() {
@@ -113,24 +113,14 @@
     var finishResults = function(email, date, skill) {
       var promiselist = [];
       var data = [];
-      if ( skill.indexOf('"') > -1 ){
-        params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + skill + '")';
-      }
-      else {
-        var escapestring = (skill + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-        params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + escapestring + '")';
-      }
-      
-      console.log(params['where']);
+      params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + skill + '")';
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       Promise.all(promiselist).then(function(promiseArray){
-        console.log(promiseArray);
         data.push(email);
         data.push(date);
         data.push(skill);
         var rating = promiseArray[0].values();
-        console.log(rating);
         var ratingkeys = Object.keys(rating);
         data.push(ratingkeys[0]);
         var review = promiseArray[0].values();
