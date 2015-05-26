@@ -191,7 +191,7 @@
       params['where'] = '(properties["$email"] == "' + email + '")';
       returnObj.push(email);
       returnObj.push(date);
-      returnObj.push(MP.api.segment("Skill Review", "skill_name_en", params).done(function(results){ return results.values(); }));
+      promiselist.push(MP.api.segment("Skill Review", "skill_name_en", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       
