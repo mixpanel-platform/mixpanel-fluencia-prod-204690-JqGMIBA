@@ -17,11 +17,7 @@
   <body class="mixpanel-platform-body">
     <div class="mixpanel-platform-section">
       <div id="dateSelect" style="float: right;"></div>
-      <div id="intervalSelect" style="float: left;"></div>
-      <div id="interval" class="mixpanel-platform-label" style="margin-left: 10px;">interval</div>
       <div style="clear: both;"></div>
-      <div id="unitSelect" style="float: left;"></div>
-      <div id="unit" class="mixpanel-platform-label" style="margin-left: 10px;">type</div>
     </div>
     <div>
       <table id="resultsTable"></table>
@@ -30,33 +26,12 @@
     <script>
     
     var dateSelect  = $('#dateSelect').MPDatepicker();
-        
-    var options = {
-      items: [
-        {label: '-- Select unit --', value: '0'},
-        {label: 'day', value: 'day'},
-        {label: 'week', value: 'week'},
-        {label: 'month', value: 'month'}
-      ]
-    };
-        
-    var intervalPicker = $('#intervalSelect').MPSelect(options);
-    
-    var options2 = {
-      items: [
-        {label: '-- Select type --', value: '0'},
-        {label: 'totals', value: 'general'},
-        {label: 'unique', value: 'unique'}
-      ]
-    };
-    
-    var unitPicker = $('#unitSelect').MPSelect(options2);
     
     var params = {
           from: '2015-01-01',
           to: '2015-04-30',
           type: 'general',
-          unit: 'month',
+          unit: 'day',
           limit: 1
         };
     
@@ -70,11 +45,9 @@
         
       params['from'] = dateRange.from.toISOString().substring(0, 10);
       params['to'] = dateRange.to.toISOString().substring(0, 10);
-      params['unit'] = interval;
-      params['type'] = unit;
       
       promiselist = [];
-      if(dateRange && interval!=0 && unit !=0) {
+      if(dateRange) {
         promiselist.push(MP.api.segment("Skill Review", "$email", params).done(function(results){ return results.values(); }));
         
         Promise.all(promiselist).then(function(promiseArray){
