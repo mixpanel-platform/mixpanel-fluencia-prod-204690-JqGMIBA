@@ -203,7 +203,9 @@
       
       Promise.all(promiselist).then(function(promiseArray){
         for(i=0; i<promiseArray.length; i+=3){
-          console.log(promiseArray[i].values());
+          var name = promiseArray[i].values());
+          var namekeys = Object.keys(name);
+          console.log(namekeys);
           console.log(promiseArray[i+1].values());
           console.log(promiseArray[i+2].values());
           //returnObj.push()
