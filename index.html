@@ -205,10 +205,13 @@
         for(i=0; i<promiseArray.length; i+=3){
           var name = promiseArray[i].values();
           var namekeys = Object.keys(name);
-          console.log(namekeys);
-          console.log(promiseArray[i+1].values());
-          console.log(promiseArray[i+2].values());
-          //returnObj.push()
+          returnObj.push(namekeys[0]);
+          var rating = promiseArray[i+1].values();
+          var ratingkeys = Object.keys(rating);
+          returnObj.push(ratingkeys[0]);
+          var review = promiseArray[i+2].values();
+          var reviewkeys = Object.keys(review);
+          returnObj.push(reviewkeys[0]);
         }
         console.log(returnObj);
         return returnObj;
