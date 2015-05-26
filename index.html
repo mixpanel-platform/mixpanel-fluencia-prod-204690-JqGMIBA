@@ -89,101 +89,7 @@
       }
 
       Promise.all(promiselist).then(function(promiseArray){
-        console.log(promiseArray);
-        var total = 0;
-        for(i=0; i<promiseArray.length; i++){
-          total += promiseArray[i];
-        }
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Activity" + '</td>' +
-            '<td>' + "Count" + '</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "---" + '</td>' +
-            '<td>' + "---" + '</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Video Watched" + '</td>' +
-            '<td>' + promiseArray[0]/total*100 + '%</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Review Watched" + '</td>' +
-            '<td>' + promiseArray[1]/total*100 + '%</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Video Recorded" + '</td>' +
-            '<td>' + promiseArray[2]/total*100 + '%</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Video Shared" + '</td>' +
-            '<td>' + promiseArray[3]/total*100 + '%</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Comment Posted" + '</td>' +
-            '<td>' + promiseArray[4]/total*100 + '%</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Review Posted" + '</td>' +
-            '<td>' + promiseArray[5]/total*100 + '%</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Paid for Review" + '</td>' +
-            '<td>' + promiseArray[6]/total*100 + '%</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "---" + '</td>' +
-            '<td>' + "---" + '</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Active Posters" + '</td>' +
-            '<td>' + promiseArray[3] + '</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Active Commenters" + '</td>' +
-            '<td>' + promiseArray[4] + '</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "New Accounts" + '</td>' +
-            '<td>' + promiseArray[7] + '</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Active Reviewers" + '</td>' +
-            '<td>' + promiseArray[8] + '</td>' +
-            '</tr>'
-          );
-        $('table#resultsTable').append(
-            '<tr>' +
-            '<td>' + "Active Users" + '</td>' +
-            '<td>' + promiseArray[9] + '</td>' +
-            '</tr>'
-          );
+        chartIt(promiseArray);
       });
     }
     
@@ -216,6 +122,21 @@
         console.log(returnObj);
         return returnObj;
       });
+    }
+    
+    var chartIt = function(data) {
+      console.log(data);
+      for(i=0; i<promiseArray.length; i+=5){
+        $('table#resultsTable').append(
+            '<tr>' +
+            '<td>' + promiseArray[i] + '</td>' +
+            '<td>' + promiseArray[i+1] + '</td>' +
+            '<td>' + promiseArray[i+2] + '</td>' +
+            '<td>' + promiseArray[i+3] + '</td>' +
+            '<td>' + promiseArray[i+4] + '</td>' +
+            '</tr>'
+        );
+      }
     }
     
     queryNav();
