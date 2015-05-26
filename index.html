@@ -57,7 +57,7 @@
           to: '2015-04-30',
           type: 'general',
           unit: 'month',
-          limit: 10
+          limit: 1
         };
     
     var queryNav = function() {
@@ -215,18 +215,24 @@
     
     //return flat object of: email, date, skill, rating, review
     var processResults = function(email, date, results) {
-      console.log("processing results");
+      var returnObj = [];
       var promiselist = [];
       params['where'] = '(properties["$email"] == "' + email + '")';
-      promiselist.push(email);
-      promiselist.push(date);
-      promiselist.push(MP.api.segment("Skill Review", "skill_name_en", params).done(function(results){ return results.values(); }));
+      returnObj.push(email);
+      returnObj.push(date);
+      returnObj.push(MP.api.segment("Skill Review", "skill_name_en", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       
       Promise.all(promiselist).then(function(promiseArray){
-        console.log(promiseArray);
-        return promiseArray;
+        for(i=0; i<promiseArray.length; i+=3){
+          console.log(promiseArray[i].values());
+          console.log(promiseArray[i+1].values());
+          console.log(promiseArray[i+2].values());
+          //returnObj.push()
+        }
+        console.log(returnObj);
+        return returnObj;
       });
     }
     
