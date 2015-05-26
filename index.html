@@ -197,29 +197,24 @@
       returnObj.push(email);
       returnObj.push(date);
       promiselist.push(MP.api.segment("Skill Review", "skill_name_en", params).done(function(results){ return results.values(); }));
+      //params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == ';
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       
       Promise.all(promiselist).then(function(promiseArray){
-        console.log(promiseArray);
-        var skill = promiseArray[0].values();
-        console.log(skill);
-        var skillkey = Object.keys(skill);
-        var rating = promiseArray[1].values();
-        console.log(rating);
-        var ratingkey = Object.keys(ratingkey);
-        var review = promiseArray[2].values();
-        console.log(review);
-        var reviewkey = Obkect.keys(review);
-        returnObj.push(skillkey[0]);
-        returnObj.push(ratingkey[0]);
-        returnObj.push(reviewkey[0]);
+        for(i=0; i<promiseArray.length; i+=3){
+          console.log(promiseArray[i].values());
+          console.log(promiseArray[i+1].values());
+          console.log(promiseArray[i+2].values());
+          //returnObj.push()
+        }
         console.log(returnObj);
         return returnObj;
       });
     }
     
     queryNav();
+    
     dateSelect.on('change', queryNav);
      
     </script>
