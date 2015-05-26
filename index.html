@@ -74,7 +74,7 @@
       
       promiselist = [];
       if(dateRange && interval!=0 && unit !=0) {
-        promiselist.push(MP.api.segment("Skill Review", "Email", params).done(function(results){ return results.values(); }));
+        promiselist.push(MP.api.segment("Skill Review", "$email", params).done(function(results){ return results.values(); }));
         
         Promise.all(promiselist).then(function(promiseArray){
           calculateResults(promiseArray);
