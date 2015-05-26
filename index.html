@@ -95,33 +95,29 @@
     
     //return flat object of: email, date, skill, rating, review
     var processResults = function(email, date, results) {
-      var returnObj = [];
       var promiselist = [];
       params['where'] = '(properties["$email"] == "' + email + '")';
       params['to'] = date;
       params['from'] = date;
-      returnObj.push(email);
-      returnObj.push(date);
       promiselist.push(MP.api.segment("Skill Review", "skill_name_en", params).done(function(results){ return results.values(); }));
-      //params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == ';
-      promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
-      promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       
       Promise.all(promiselist).then(function(promiseArray){
-        for(i=0; i<promiseArray.length; i+=3){
-          var name = promiseArray[i].values();
-          var namekeys = Object.keys(name);
-          returnObj.push(namekeys[0]);
-          console.log(namekeys);
-          var rating = promiseArray[i+1].values();
-          var ratingkeys = Object.keys(rating);
-          returnObj.push(ratingkeys[0]);
-          var review = promiseArray[i+2].values();
-          var reviewkeys = Object.keys(review);
-          returnObj.push(reviewkeys[0]);
-        }
-        chartIt(returnObj);
+        var name = promiseArray[0].values();
+        console.log(name);
+        var namekeys = Object.keys(name);
+        console.log(namekeys);
+        
       });
+    }
+    
+    var finishResults = function(email, date, skill) {
+      var promiselist = [];
+      params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + skill '")';
+      promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
+      promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
+      Promise.all(promiselist).then(function(promiseArray){
+        
+      }
     }
     
     var chartIt = function(data) {
