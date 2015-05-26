@@ -84,7 +84,7 @@
       for(i=0; i<keys.length; i++){
         var dates = Object.keys(segment[keys[i]]);
         for(j=0; j<dates.length; j++){
-          promiselist.push(processResults(keys[i], dates[j], segment[keys[i]][dates[j]]));
+          promiselist.push(processResultsSkill(keys[i], dates[j], segment[keys[i]][dates[j]]));
         }
       }
 
@@ -188,7 +188,7 @@
     }
     
     //return flat object of: email, date, skill, rating, review
-    var processResults = function(email, date, results) {
+    var processResultsSkill = function(email, date, results) {
       var returnObj = [];
       var promiselist = [];
       params['where'] = '(properties["$email"] == "' + email + '")';
@@ -197,17 +197,19 @@
       returnObj.push(email);
       returnObj.push(date);
       promiselist.push(MP.api.segment("Skill Review", "skill_name_en", params).done(function(results){ return results.values(); }));
-      //params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == ';
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       
       Promise.all(promiselist).then(function(promiseArray){
-        for(i=0; i<promiseArray.length; i+=3){
-          console.log(promiseArray[i].values());
-          console.log(promiseArray[i+1].values());
-          console.log(promiseArray[i+2].values());
-          //returnObj.push()
-        }
+        var skill = promiseArray[0].values();
+        var skillkey = Object.keys(skill);
+        var rating = promiseArray[1].values();
+        var ratingkey = Object.keys(ratingkey);
+        var review = promiseArray[2].values();
+        var reviewkey = Obkect.keys(review);
+        returnObj.push(skillkey[0]);
+        returnObj.push(ratingkey[0]);
+        returnObj.push(reviewkey[0]);
         console.log(returnObj);
         return returnObj;
       });
