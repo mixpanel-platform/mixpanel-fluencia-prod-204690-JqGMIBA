@@ -118,7 +118,7 @@
       }
       else {
         var escapestring = (skill + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-        params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + excapestring + '")';
+        params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + escapestring + '")';
       }
       
       console.log(params['where']);
