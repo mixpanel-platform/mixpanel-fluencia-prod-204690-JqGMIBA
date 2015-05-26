@@ -36,7 +36,7 @@
           to: '2015-04-30',
           type: 'general',
           unit: 'day',
-          limit: 5
+          limit: 1
         };
     
     var queryNav = function() {
@@ -117,6 +117,7 @@
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       Promise.all(promiselist).then(function(promiseArray){
+        console.log(promiseArray);
         data.push(email);
         data.push(date);
         data.push(skill);
