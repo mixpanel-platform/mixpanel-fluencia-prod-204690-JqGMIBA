@@ -36,7 +36,7 @@
           to: '2015-04-30',
           type: 'general',
           unit: 'day',
-          limit: 1
+          limit: 5
         };
     
     var queryNav = function() {
@@ -126,7 +126,6 @@
         var review = promiseArray[0].values();
         var reviewkeys = Object.keys(review);
         data.push(reviewkeys[0]);
-        console.log(data);
         chartIt(data);
       });
     }
