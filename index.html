@@ -113,7 +113,7 @@
     var finishResults = function(email, date, skill) {
       var promiselist = [];
       var data = [];
-      params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + skill.escape() + '")';
+      params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + escape(skill) + '")';
       promiselist.push(MP.api.segment("Skill Review", "rating_num", params).done(function(results){ return results.values(); }));
       promiselist.push(MP.api.segment("Skill Review", "review", params).done(function(results){ return results.values(); }));
       Promise.all(promiselist).then(function(promiseArray){
