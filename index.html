@@ -84,13 +84,9 @@
       for(i=0; i<keys.length; i++){
         var dates = Object.keys(segment[keys[i]]);
         for(j=0; j<dates.length; j++){
-          promiselist.push(processResults(keys[i], dates[j], segment[keys[i]][dates[j]]));
+          processResults(keys[i], dates[j], segment[keys[i]][dates[j]]);
         }
       }
-
-      Promise.all(promiselist).then(function(promiseArray){
-        chartIt(promiseArray);
-      });
     }
     
     //return flat object of: email, date, skill, rating, review
@@ -119,8 +115,7 @@
           var reviewkeys = Object.keys(review);
           returnObj.push(reviewkeys[0]);
         }
-        console.log(returnObj);
-        return returnObj;
+        chartIt(returnObj);
       });
     }
     
