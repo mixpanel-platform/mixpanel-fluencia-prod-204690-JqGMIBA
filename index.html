@@ -104,7 +104,6 @@
       Promise.all(promiselist).then(function(promiseArray){
         var name = promiseArray[0].values();
         var namekeys = Object.keys(name);
-        console.log(namekeys);
         for(i=0; i<namekeys.length; i++){
           finishResults(email, date, namekeys[i]);
         }
