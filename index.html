@@ -113,7 +113,7 @@
     var finishResults = function(email, date, skill) {
       var promiselist = [];
       var data = [];
-      if ( inputString.indexOf('"') > -1 ){
+      if ( skill.indexOf('"') > -1 ){
         params['where'] = '(properties["$email"] == "' + email + '") and (properties["skill_name_en"] == "' + skill + '")';
       }
       else {
