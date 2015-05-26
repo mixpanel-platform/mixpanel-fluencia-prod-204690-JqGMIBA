@@ -36,7 +36,7 @@
           to: '2015-04-30',
           type: 'general',
           unit: 'day',
-          limit: 10
+          limit: 1
         };
     
     var queryNav = function() {
@@ -103,7 +103,6 @@
       
       Promise.all(promiselist).then(function(promiseArray){
         var name = promiseArray[0].values();
-        console.log(name);
         var namekeys = Object.keys(name);
         console.log(namekeys);
         
