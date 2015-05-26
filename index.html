@@ -188,7 +188,7 @@
     }
     
     //return flat object of: email, date, skill, rating, review
-    var processResultsSkill = function(email, date, results) {
+    var processResults = function(email, date, results) {
       var returnObj = [];
       var promiselist = [];
       params['where'] = '(properties["$email"] == "' + email + '")';
