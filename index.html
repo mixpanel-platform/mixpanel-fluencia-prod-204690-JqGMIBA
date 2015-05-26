@@ -93,12 +93,23 @@
             '<td>' + "Review" + '</td>' +
             '</tr>'
           );
+      $('table#resultsTable').append(
+            '<tr>' +
+            '<td>' + "---" + '</td>' +
+            '<td>' + "---" + '</td>' +
+            '<td>' + "---" + '</td>' +
+            '<td>' + "---" + '</td>' +
+            '<td>' + "---" + '</td>' +
+            '</tr>'
+          );
+          
       promiselist = [];
       var segment = data[0].values();
       console.log(segment);
       var keys = Object.keys(segment);
       for(i=0; i<segment.length; i++){
         var dates = Object.keys(segment[keys[i]]);
+        console.log(dates);
         for(j=0; j<dates.length; j++){
           promiselist.push(processResults(keys[i], dates[j], segment[keys[i]][dates[j]]));
         }
